@@ -5,9 +5,6 @@ export const styles = StyleSheet.create({
 		flex: 2,
 		gap: 30,
 		alignItems: "center",
-		paddingTop: 39,
-		paddingHorizontal: 16,
-		paddingBottom: 175,
 	},
 	formFields: {
 		width: "100%",

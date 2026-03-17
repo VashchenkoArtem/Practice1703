@@ -8,6 +8,7 @@ export default function LoginScreen() {
             <WelcomeBlock />
             <LoginForm />
             <AdditionalLinks
+                linkTo="register/step-one"
                 text="Don't have an account? "
                 linkText="Register now!"
             />

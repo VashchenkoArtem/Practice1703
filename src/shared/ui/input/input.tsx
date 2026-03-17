@@ -37,7 +37,7 @@ export function Input(props: InputProps) {
 	);
 }
 
-function Password () {
+function Password (props: InputProps) {
 	const [isPasswordHiden, setIsPasswordHide] = useState<boolean>(true)
 	return(
 		<Input iconLeft={<ICONS.KeyIcon ></ICONS.KeyIcon>} iconRight={
@@ -55,9 +55,9 @@ function Password () {
 		
 		label={"Password"}
 		secureTextEntry= {isPasswordHiden}
-		placeholder={"Password"}>
-		
-	
+		placeholder={"Password"}
+		{...props}
+		>
 		</Input>
 		
 	)
