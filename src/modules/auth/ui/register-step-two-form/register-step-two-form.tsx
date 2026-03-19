@@ -18,9 +18,9 @@ export function RegisterStepTwoForm() {
 
     async function onFinalSubmit(data: StepTwoForm) {
         const finalData = {
-            email: params.email as string,
-            username: params.username as string,
-            password: params.password as string,
+            email: params.email,
+            username: params.username,
+            password: params.password,
             name: data.name,
             surname: data.surname,
             avatar: data.avatar
