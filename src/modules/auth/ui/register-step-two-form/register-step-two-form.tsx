@@ -22,6 +22,7 @@ export function RegisterStepTwoForm() {
     
     async function onSubmit(data: StepTwoForm) {
         await register({...data, ...params})
+        console.log("edsdad")
     }
 
     return (

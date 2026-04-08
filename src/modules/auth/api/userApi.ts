@@ -1,12 +1,12 @@
 import { BaseApi } from "@shared/api/baseApi";
-import { IUser } from "@shared/types/user.types";
+import { ILogin, IUser } from "@shared/types/user.types";
 import { IRegister, LoginResponse } from "./api.types";
 
 
 
 export const userApi = BaseApi.injectEndpoints({
     endpoints: (builder) => ({
-        register: builder.mutation<void, IRegister>({
+        register: builder.mutation<LoginResponse, IRegister>({
             query: (body) => {
                 const formData = new FormData()
                 formData.append("email", body.email)
@@ -14,7 +14,11 @@ export const userApi = BaseApi.injectEndpoints({
                 formData.append("password", body.password)
                 formData.append("name", body.name)
                 formData.append("surname", body.surname)
-                formData.append("avatar", body.avatar)
+                formData.append("avatar", {
+                uri: body.avatar,
+                name: "avatar.jpg",
+                type: "image/jpeg",
+                } as unknown as Blob)
                 return {
                     url: "/users/register",
                     method: "POST",
@@ -22,7 +26,7 @@ export const userApi = BaseApi.injectEndpoints({
                 }
             }
         }),
-        login: builder.mutation<LoginResponse, FormData>({
+        login: builder.mutation<LoginResponse, ILogin>({
             query: (body) => ({
                 url: "/users/login",
                 method: "POST",

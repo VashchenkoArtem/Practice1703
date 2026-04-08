@@ -19,10 +19,7 @@ export function LoginForm() {
 	const { handleSubmit, control, formState } = useForm<LoginForm>({resolver: yupResolver(loginValidator)})
 	const [ login ] = useLoginMutation()
 	async function onSubmit(data: LoginForm){
-		const formData = new FormData()
-		formData.append("email", data.email);
-		formData.append("password", data.password);
-		login(formData);
+		login(data);
 	}
 
 	return (
