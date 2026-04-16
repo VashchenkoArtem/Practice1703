@@ -19,19 +19,21 @@ export function RegisterStepTwoForm() {
     }>();
     const router = useRouter();
     const [register] = useRegisterMutation();
-    const { control, handleSubmit } = useForm<StepTwoForm>({
+    const { control, handleSubmit, formState: {errors}, setError } = useForm<StepTwoForm>({
         resolver: yupResolver(stepTwoValidator),
     });
     const { token, setToken } = useUserContext();
-    
+    const rootError = errors?.root
     async function onSubmit(data: StepTwoForm) {
         try {
             const { token } = await register({ ...data, ...params }).unwrap();
             setToken(token);
-
-        } catch (error) {
-            console.log(error);
-            return;
+			router.push("/(tabs)/chats")
+        } catch (error: any) {   
+            setError("root", {
+                type: "server",
+                message: error?.data
+		    })
         }
     }
 
@@ -82,6 +84,11 @@ export function RegisterStepTwoForm() {
                 <TouchableOpacity onPress={() => router.back()}>
                     <Text style={styles.goBackText}>Go back to step one</Text>
                 </TouchableOpacity>
+                {rootError && 
+                    <Text style={{ color: "red" }}>
+                        {rootError.message}
+                    </Text>
+                }
             </View>
         </View>
     );

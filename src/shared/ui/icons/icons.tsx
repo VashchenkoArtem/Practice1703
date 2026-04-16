@@ -6,6 +6,10 @@ import { KeyIcon } from "./_icons/key";
 import { MailIcon } from "./_icons/mail";
 import { SearchingGlassIcon } from "./_icons/searching-glass";
 import { UserIcon } from "./_icons/user"
+import { ContactsIcon } from "./_icons/contacts";
+import { SettingsIcon } from "./_icons/settings";
+import { ChatsIcon } from "./_icons/chats";
+import { ProfileIcon } from "./_icons/profile";
 
 export const ICONS = {
 	MailIcon,
@@ -14,5 +18,9 @@ export const ICONS = {
 	EyeOpenIcon,
 	ErrorIcon,
 	UserIcon,
-	SearchingGlassIcon
+	SearchingGlassIcon,
+	ContactsIcon,
+	SettingsIcon,
+	ChatsIcon,
+	ProfileIcon
 };

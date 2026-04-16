@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { styles } from "./login-form.styles";
 import { Button, ICONS, Input } from "@shared/ui";
 import { Controller, useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { loginValidator } from "@modules/auth/models/lib/login.validation";
 import {yupResolver} from "@hookform/resolvers/yup"
 import { useRouter } from "expo-router";
 import { useLogin } from "@modules/auth/hooks/login";
+import { useState } from "react";
 
 import { useLoginMutation } from "@modules/auth/api/userApi";
 
@@ -19,19 +20,23 @@ interface LoginForm {
 
 
 export function LoginForm() {
-	const { handleSubmit, control, formState } = useForm<LoginForm>({resolver: yupResolver(loginValidator)})
+	const { handleSubmit, control, formState: {errors}, setError } = useForm<LoginForm>({resolver: yupResolver(loginValidator)})
 	const [ login ] = useLoginMutation()
+	const rootError = errors.root
 	const { setToken } = useUserContext()
+	const router = useRouter()
 	async function onSubmit(data: LoginForm){
 		try{
 			const { token } = await login(data).unwrap()
 			setToken(token)
+			router.push("/(tabs)/chats")
 		}
-		catch(error){
-
-			console.log(error)
-		}
-	}
+	catch(error: any){
+		setError("root", {
+			type: "server",
+			message: error?.data
+		})
+	}}
 
 	return (
 		<View style={styles.container}>
@@ -62,7 +67,12 @@ export function LoginForm() {
 					name="password"
 					control={control}
 					render={({field, fieldState}) => {
-						return (<Input.Password error={fieldState.error?.message} onChangeText={field.onChange} {...field}/>)
+						return (
+							<View>
+								<Input.Password error={fieldState.error?.message} onChangeText={field.onChange} {...field}/>
+									
+							</View>
+					)
 					}}>
 						
 					
@@ -70,6 +80,11 @@ export function LoginForm() {
 				
 			</View>
 			<Button onPress={handleSubmit(onSubmit)} title="Login" />
+				{rootError && 
+					<Text style={{ color: "red" }}>
+						{rootError.message}
+					</Text>
+				}
 		</View>
 	);
 }
