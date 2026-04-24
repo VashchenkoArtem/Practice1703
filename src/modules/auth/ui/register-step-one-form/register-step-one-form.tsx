@@ -36,6 +36,7 @@ export function RegisterStepOneForm() {
                                 inputContainerStyle={styles.inputContainer}
                                 iconLeft={<ICONS.MailIcon />}
                                 label="Email"
+                                autoCapitalize="none"
                                 placeholder="email@gmail.com"
                                 onChangeText={field.onChange}
                                 value={field.value}
@@ -53,6 +54,7 @@ export function RegisterStepOneForm() {
                                 inputContainerStyle={styles.inputContainer}
                                 iconLeft={<ICONS.UserIcon />}
                                 label="Username" placeholder="User123"
+                                
                                 onChangeText={field.onChange}
                                 value={field.value}
                                 error={fieldState.error?.message}

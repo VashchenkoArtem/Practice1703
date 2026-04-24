@@ -62,9 +62,10 @@ function Password (props: InputProps) {
 		
 	)
 }
-function ChatInput (){
+function ChatInput (props: InputProps){
+	const { value, onChangeText } = props
 	return (
-		<Input inputContainerStyle={styles.chatInputContainer} iconLeft={<ICONS.SearchingGlassIcon width={24} height={24}/>} placeholder="Search">
+		<Input inputContainerStyle={styles.chatInputContainer} iconLeft={<ICONS.SearchingGlassIcon width={24} height={24}/>} value={value} onChangeText={onChangeText} placeholder="Search">
 		</Input>
 	)
 }

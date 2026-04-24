@@ -5,7 +5,7 @@ import { Input } from "../input";
 import { styles } from "./style";
 
 export function Headers(props:IProps){
-    const {isIconLeft, isIconRight, isInput, text } = props
+    const {isIconLeft, isIconRight, isInput, text, search, setSearch } = props
     return (
         <View style = {styles.headersContainer}>
             <View style = {[styles.header]}>
@@ -20,8 +20,10 @@ export function Headers(props:IProps){
                 }
             </View>
             {isInput && 
-                <Input.ChatInput/>
-                }
-        
+                <Input.ChatInput
+                    value = {search ? search : ""}
+                    onChangeText={setSearch}
+                />
+                }       
         </View>)
 }
