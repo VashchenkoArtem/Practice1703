@@ -1,0 +1,7 @@
+import { ChatList } from "@modules/chat";
+import { View } from "react-native";
+export default function Chats() {
+    return (<View style={{ flex: 1 }}>
+			<ChatList />
+		</View>);
+}

@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
-
 export const styles = StyleSheet.create({
-	container: {
+    container: {
         width: "100%",
         alignItems: "center",
         paddingHorizontal: 20,
@@ -22,8 +21,8 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 10,
     },
-	buttonsContainer: {
-		alignItems: "center",
+    buttonsContainer: {
+        alignItems: "center",
         width: "100%",
         gap: 16,
     },

@@ -1,1 +1,1 @@
-export {AvatarField} from "./avatar-field";
+export { AvatarField } from "./avatar-field";

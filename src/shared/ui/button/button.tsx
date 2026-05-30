@@ -1,22 +1,13 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 import { ButtonProps } from "./button.types";
 import { styles } from "./button.styles";
-
 export function Button(props: ButtonProps) {
-	const { title, style, titleStyle, disabled, ...restProps } = props;
-
-	return (
-		<TouchableOpacity
-			style={[styles.button, disabled && styles.disabled, style]}
-			disabled={disabled}
-			{...restProps}
-		>
-			<Text
-				style={[styles.text, disabled && styles.disabledText, titleStyle]}
-			>
-				{title}
-			</Text>
-		</TouchableOpacity>
-	);
+    const { title, style, titleStyle, disabled, isLoading, ...restProps } = props;
+    const isDisabled = disabled || isLoading;
+    return (<TouchableOpacity style={[styles.button, isDisabled && styles.disabled, style]} disabled={isDisabled} {...restProps}>
+			{isLoading ? (<ActivityIndicator />) : (<Text style={[styles.text, isDisabled && styles.disabledText, titleStyle]}>
+					{title}
+				</Text>)}
+		</TouchableOpacity>);
 }

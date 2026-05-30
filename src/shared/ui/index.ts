@@ -1,4 +1,5 @@
-export {Button} from "./button"
-export { ICONS } from "./icons";
-export {IMAGES} from "./images"
-export {Input } from "./input"
+export { Button } from "./button";
+export { ICONS, Icons } from "./icons";
+export { IMAGES, Images } from "./images";
+export { Input } from "./input";
+export * from "./header";
