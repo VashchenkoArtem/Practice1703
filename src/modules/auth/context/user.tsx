@@ -33,6 +33,31 @@ export function UserContextProvider({ children }: {
         };
         getToken();
     }, []);
+
+    useEffect(() => {
+        if (!token) return;
+
+        socket.auth = { token: `Bearer ${token}` };
+
+        socket.disconnect();
+        socket.connect();
+
+        const onConnect = () => {
+            console.log("user connected");
+        };
+
+        const onDisconnect = () => {
+            console.log("user disconnected");
+        };
+
+        socket.on("connect", onConnect);
+        socket.on("disconnect", onDisconnect);
+
+        return () => {
+            socket.off("connect", onConnect);
+            socket.off("disconnect", onDisconnect);
+        };
+    }, [token]);
    
     useEffect(() => {
         if (!isSuccess)

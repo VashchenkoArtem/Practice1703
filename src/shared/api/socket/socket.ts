@@ -4,3 +4,6 @@ import { ClientEvents, ServerEvents } from "./contracts";
 export const socket: Socket<ServerEvents, ClientEvents> = io(WS_SERVER_URL, {
     autoConnect: false,
 });
+socket.on("connect_error", (error) => {
+    console.log("ERROR: " + error)
+})

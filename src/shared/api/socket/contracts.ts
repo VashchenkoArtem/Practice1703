@@ -1,8 +1,8 @@
 import { Message } from "@modules/chat/model";
 interface SendMessagePayload {
-    type: "text" | "image";
-    mediaUrl?: string;
-    text?: string;
+    type: "text" | "media";
+    mediaUrl: string | null;
+    text: string | null;
     chatId: number;
 }
 interface JoinChatPayload {

@@ -19,3 +19,13 @@ export interface MessagesPayload {
     cursor?: number | null;
     limit?: number;
 }
+export interface ChatWithImagePayload{
+    req: {
+        text?: string;
+        type: "media"
+        mediaUrl: string;
+    },
+    params: {
+        chatId: number
+    }
+}

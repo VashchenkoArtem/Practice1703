@@ -1,6 +1,6 @@
 export interface Message {
     id: number;
-    type: string;
+    type: "text" | "media";
     text: string | null;
     mediaUrl: string | null;
     chatAsLastMessageId: number;
