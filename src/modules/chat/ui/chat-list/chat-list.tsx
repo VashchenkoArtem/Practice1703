@@ -12,8 +12,8 @@ function ChatItem({ item, isMyLastMessage, }: {
     item: ChatWithContactInfo;
     isMyLastMessage: boolean;
 }) {
+    
     const router = useRouter();
-    console.log(item)
     const name = item.isInContact
         ? [item.participant.contactOf.contactName, item.participant.contactOf.contactSurname]
             .filter(Boolean)
@@ -62,18 +62,7 @@ export function ChatList() {
         skipPollingIfUnfocused: true,
     });
     const [refreshing, setRefreshing] = useState<boolean>(false);
-    useEffect(() => {
-        const handler = () => {
-            console.log("asdasdasd")
-            refetch();
-        };
 
-        socket.on("newChatMessage", handler);
-
-        return () => {
-            socket.off("newChatMessage", handler);
-        };
-    }, [refetch]);
     if (isLoading)
         return (<View style={styles.loading}>
 				<ActivityIndicator size={100}/>

@@ -1,10 +1,12 @@
-import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, Text, View, Image } from "react-native";
 import { styles } from "./messages-block.styles";
 import { useGetMessagesQuery } from "@modules/chat/api";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { useUserContext } from "@modules/auth";
-function Message({ text, isMyMessage, }: {
+import { IMAGE_URL } from "@shared/constants";
+function Message({ text, isMyMessage, image }: {
+    image: string | null;
     text: string;
     isMyMessage: boolean;
 }) {
@@ -13,6 +15,15 @@ function Message({ text, isMyMessage, }: {
             isMyMessage ? styles.myMessage : styles.otherMessage,
         ]}>
 			<Text style={styles.message}>{text}</Text>
+            { image && (
+                <Image
+                    source={{
+                        uri: IMAGE_URL + image
+                    }}
+                    width={300}
+                    height={350}
+                />
+            )}
 		</View>);
 }
 export function MessagesBlock() {
@@ -46,5 +57,5 @@ export function MessagesBlock() {
             setCursor(data.meta.nextCursor);
         }
     };
-    return (<FlatList data={messages} keyExtractor={(item) => String(item.id)} renderItem={({ item }) => (<Message text={item.text || "No text"} isMyMessage={item.senderId === user?.id}/>)} contentContainerStyle={styles.list} inverted onEndReached={handleLoadMore} onEndReachedThreshold={0.1}/>);
+    return (<FlatList data={messages} keyExtractor={(item) => String(item.id)} renderItem={({ item }) => (<Message text={item.text || "No text"} isMyMessage={item.senderId === user?.id} image = {item.mediaUrl}/>)} contentContainerStyle={styles.list} inverted onEndReached={handleLoadMore} onEndReachedThreshold={0.1}/>);
 }

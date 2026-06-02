@@ -10,7 +10,7 @@ const messageApi = baseApi.injectEndpoints({
                     params.set("cursor", String(cursor));
                 }
                 return {
-                    url: `/messages/chat/${chatId}?${params.toString()}`,
+                    url: `/messages/chats/${chatId}?${params.toString()}`,
                 };
             },
             async onCacheEntryAdded({ chatId }, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
